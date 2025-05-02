@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 33% 3%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 33% 5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 33% 5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 196 86% 62%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 270 73% 46%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 20% 12%;
+    --muted-foreground: 240 10% 70%;
+
+    --accent: 273 73% 46%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 20% 20%;
+    --input: 240 20% 20%;
+    --ring: 196 86% 62%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-space-dark text-foreground font-sans;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 50% 50%, #0a0a19 0%, #050510 100%);
+    background-blend-mode: overlay;
+  }
+
+  ::selection {
+    @apply bg-cosmic-blue/30 text-white;
+  }
+
+  /* Enhanced scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #050510;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1e1e3f;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4CC9F0;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+  }
+
+  .border-glow {
+    box-shadow: 0 0 10px rgba(76, 201, 240, 0.3);
+  }
+
+  .star-field {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Interactive card effect */
+  .card-interactive {
+    @apply relative overflow-hidden bg-space-light border border-cosmic-blue/10 transition-all duration-300 hover:border-cosmic-blue/30;
+  }
+
+  .card-interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(76, 201, 240, 0.1),
+      transparent
+    );
+    transition: left 0.7s;
+  }
+
+  .card-interactive:hover::before {
+    left: 100%;
+  }
+
+  .card-interactive::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--x, 50%) var(--y, 50%),
+      rgba(76, 201, 240, 0.15) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .card-interactive:hover::after {
+    opacity: 1;
+  }
+
+  /* Enhanced glow effects */
+  .text-glow-intense {
+    text-shadow: 
+      0 0 5px rgba(76, 201, 240, 0.3),
+      0 0 20px rgba(76, 201, 240, 0.5),
+      0 0 40px rgba(76, 201, 240, 0.2);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(90deg, #4CC9F0, #7B2CBF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* New border effects */
+  .border-gradient {
+    border: 2px solid transparent;
+    background: linear-gradient(#0a0a19, #0a0a19) padding-box,
+                linear-gradient(90deg, #4CC9F0, #7B2CBF) border-box;
+  }
+
+  /* Subtle background patterns */
+  .bg-stars {
+    background-image: 
+      radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 75% 80%, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+    background-size: 100px 100px;
+    background-position: 0 0, 25px 25px, 50px 50px;
+  }
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
